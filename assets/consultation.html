@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Request a Consultation | Devine Hair Studio</title>
+    <meta
+      name="description"
+      content="Request a consultation with Jennifer Devine at Devine Hair Studio in Denver for custom color, color corrections, blonding, extensions, cuts, and smoothing services."
+    >
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="../index.html#home" aria-label="Devine Hair Studio home">
+        <span class="brand-mark">Devine</span>
+        <span class="brand-subtitle">Hair Studio</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#home" data-nav-link>Home</a>
+        <a href="about.html" data-nav-link>About</a>
+        <a href="services.html" data-nav-link>Services</a>
+        <a href="portfolio.html" data-nav-link>Portfolio</a>
+        <a href="#consultation" data-nav-link>Book</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="consultation" aria-label="Request a consultation">
+        <div class="hero-media" data-parallax>
+          <img src="results/after-1.jpg" alt="Dimensional blonde color result by Jennifer Devine">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-shell">
+          <div class="hero-copy" data-reveal>
+            <p class="eyebrow">Request a consultation</p>
+            <h1>Start your color journey with clarity, care, and a plan.</h1>
+            <p>
+              A consultation helps Jennifer understand your hair history, timing, goals, and service
+              fit before confirming an appointment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="editorial-intro">
+        <div class="section-shell intro-grid">
+          <div data-reveal>
+            <p class="eyebrow dark">Before the appointment</p>
+            <h2>Your appointment is not confirmed until Jennifer follows up directly.</h2>
+          </div>
+          <div class="intro-copy" data-reveal>
+            <p>
+              Color corrections, blonding, and extensions require enough time, the right products,
+              and a realistic plan. Share as much detail as you can so Jenn can guide the next step.
+            </p>
+            <p>
+              You can also text or call <a class="text-link dark-link" href="tel:+17208847707">(720) 884-7707</a>
+              for appointment requests.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-band">
+        <div class="section-shell contact-layout">
+          <div data-reveal>
+            <p class="eyebrow gold">Tell us about your hair goals</p>
+            <h2>A better consultation starts with better context.</h2>
+            <div class="contact-details">
+              <a href="tel:+17208847707">Text or call: (720) 884-7707</a>
+              <a href="mailto:jendevine318@yahoo.com">jendevine318@yahoo.com</a>
+              <a href="https://www.instagram.com/jendevinedenverhair/" target="_blank" rel="noreferrer">Instagram: @Jendevinedenverhair</a>
+              <address>Denver, Colorado - private appointment-only studio</address>
+            </div>
+            <p class="policy-note">No walk-ins. Pricing is consultation required. A $50 cancellation or no-show fee applies.</p>
+          </div>
+
+          <form class="contact-form consultation-form" data-consultation-form enctype="multipart/form-data" novalidate>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
+            <input type="hidden" name="formStartedAt" data-form-started-at>
+
+            <label>
+              Desired service
+              <select name="service" required>
+                <option value="">Choose one</option>
+                <option>Color Correction</option>
+                <option>Custom Color</option>
+                <option>Highlights or Balayage</option>
+                <option>Natural Blonde or Dimensional Blonding</option>
+                <option>Extensions</option>
+                <option>Cut or Trim</option>
+                <option>Keratin or Smoothing</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+
+            <fieldset>
+              <legend>Client type</legend>
+              <div class="choice-row">
+                <label><input type="radio" name="clientType" value="New client" required> New client</label>
+                <label><input type="radio" name="clientType" value="Returning client"> Returning client</label>
+              </div>
+            </fieldset>
+
+            <label>
+              Name
+              <input type="text" name="name" autocomplete="name" required>
+            </label>
+
+            <label>
+              Email
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+
+            <label>
+              Phone
+              <input type="tel" name="phone" autocomplete="tel" required>
+            </label>
+
+            <label>
+              Preferred contact method
+              <select name="preferredContact" required>
+                <option value="">Choose one</option>
+                <option>Text</option>
+                <option>Call</option>
+                <option>Email</option>
+              </select>
+            </label>
+
+            <label>
+              Preferred appointment date or range
+              <input type="text" name="datePreference" placeholder="Example: weekdays after June 20" required>
+            </label>
+
+            <label>
+              Preferred time of day
+              <select name="timePreference" required>
+                <option value="">Choose one</option>
+                <option>Morning</option>
+                <option>Afternoon</option>
+                <option>Evening</option>
+                <option>Flexible</option>
+              </select>
+            </label>
+
+            <label class="full-field">
+              Hair history notes
+              <textarea name="hairHistory" rows="4" placeholder="Previous color, lightener, treatments, extensions, box dye, or corrective work." required></textarea>
+            </label>
+
+            <label>
+              Current hair color
+              <input type="text" name="currentColor" placeholder="Example: dark brown with old highlights" required>
+            </label>
+
+            <label class="full-field">
+              Desired hair goal
+              <textarea name="hairGoal" rows="4" placeholder="Describe the color, length, tone, or transformation you want." required></textarea>
+            </label>
+
+            <fieldset class="full-field">
+              <legend>Anything Jennifer should know?</legend>
+              <div class="check-grid">
+                <label><input type="checkbox" name="hairFactors" value="Box dye"> Box dye</label>
+                <label><input type="checkbox" name="hairFactors" value="Previous professional color"> Previous color</label>
+                <label><input type="checkbox" name="hairFactors" value="Extensions"> Extensions</label>
+                <label><input type="checkbox" name="hairFactors" value="Corrective work"> Corrective work</label>
+                <label><input type="checkbox" name="hairFactors" value="Keratin or smoothing treatment"> Keratin or smoothing</label>
+                <label><input type="checkbox" name="hairFactors" value="Damage or breakage"> Damage or breakage</label>
+              </div>
+            </fieldset>
+
+            <label class="full-field">
+              Inspiration photo link
+              <input type="url" name="inspirationLink" placeholder="Optional: Instagram, Pinterest, or image link">
+            </label>
+
+            <label class="full-field">
+              Inspiration photos
+              <input type="file" name="photos" accept="image/jpeg,image/png,image/webp" multiple>
+              <span class="field-note">Optional. Up to 3 images, 4MB each. JPEG, PNG, or WebP.</span>
+            </label>
+
+            <label class="full-field">
+              Message/details
+              <textarea name="message" rows="4" placeholder="Anything else Jennifer should know?"></textarea>
+            </label>
+
+            <label class="acknowledgement full-field">
+              <input type="checkbox" name="acknowledgement" required>
+              I understand this is a consultation request and my appointment is not confirmed until Jennifer follows up directly.
+            </label>
+
+            <button class="form-button full-field" type="submit" data-submit-label="Submit Consultation Request">Submit Consultation Request</button>
+            <p class="form-status full-field" data-form-status role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <a href="../index.html#home" class="footer-brand">Devine Hair Studio</a>
+        <p>&copy; 2026 Devine Hair Studio. All rights reserved.</p>
+      </div>
+      <div class="footer-links" aria-label="Footer links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="#consultation">Book</a>
+        <a href="https://www.instagram.com/jendevinedenverhair/" target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+    </footer>
+
+    <script src="../config.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>

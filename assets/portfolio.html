@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio | Devine Hair Studio</title>
+    <meta
+      name="description"
+      content="View curated before and after hair transformations by Jennifer Devine of Devine Hair Studio in Denver, including blonding, color corrections, custom color, and extensions."
+    >
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="../index.html#home" aria-label="Devine Hair Studio home">
+        <span class="brand-mark">Devine</span>
+        <span class="brand-subtitle">Hair Studio</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#home" data-nav-link>Home</a>
+        <a href="about.html" data-nav-link>About</a>
+        <a href="services.html" data-nav-link>Services</a>
+        <a href="#portfolio" data-nav-link>Portfolio</a>
+        <a href="consultation.html" data-nav-link>Book</a>
+      </nav>
+    </header>
+
+    <a class="floating-book" href="consultation.html" aria-label="Book an appointment with Jennifer">Book</a>
+
+    <main>
+      <section class="hero" id="portfolio" aria-label="Devine Hair Studio portfolio">
+        <div class="hero-media" data-parallax>
+          <img src="results/after-1.jpg" alt="Dimensional blonde color result by Jennifer Devine">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-shell">
+          <div class="hero-copy" data-reveal>
+            <p class="eyebrow">Transformation portfolio</p>
+            <h1>Proof of process, patience, polish, and personal color.</h1>
+            <p>
+              A curated look at Jenn's color correction, blonding, extension, custom color, and
+              finish work from Devine Hair Studio.
+            </p>
+            <div class="hero-actions">
+              <a class="button light" href="#gallery">Explore Gallery</a>
+              <a class="button ghost" href="consultation.html">Request Consultation</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-band" id="gallery">
+        <div class="section-shell">
+          <div class="portfolio-intro" data-reveal>
+            <p class="eyebrow gold">Before and after</p>
+            <h2>Curated transformations, shown with intention.</h2>
+            <p>
+              Every result starts with a conversation about hair history, condition, desired identity,
+              and realistic timing. Move the slider, filter the gallery, and open images for a closer look.
+            </p>
+          </div>
+
+          <article class="compare-card" data-reveal>
+            <div class="compare" data-compare>
+              <img src="results/before-1.jpg" alt="Before blonde color correction">
+              <img class="compare-after" src="results/after-1.jpg" alt="After blonde color correction">
+              <span class="compare-label before">Before</span>
+              <span class="compare-label after">After</span>
+              <input data-compare-range type="range" min="0" max="100" value="50" aria-label="Compare before and after transformation">
+            </div>
+            <div class="result-copy">
+              <p class="role">Color Correction</p>
+              <h3>Blended blonde refresh</h3>
+              <p>A softer, brighter finish with cleaner tone, movement, and polish.</p>
+            </div>
+          </article>
+
+          <div class="filter-row" role="tablist" aria-label="Filter portfolio">
+            <button class="is-active" type="button" data-filter="all" aria-selected="true">All</button>
+            <button type="button" data-filter="corrections" aria-selected="false">Corrections</button>
+            <button type="button" data-filter="blonding" aria-selected="false">Blonding</button>
+            <button type="button" data-filter="extensions" aria-selected="false">Extensions</button>
+          </div>
+
+          <div class="portfolio-grid">
+            <button class="portfolio-card" type="button" data-category="corrections" data-lightbox="results/after-1.jpg" data-title="Blended blonde color correction" data-reveal>
+              <figure><img src="results/after-1.jpg" alt="Blended blonde color correction result" loading="lazy"></figure>
+              <div>
+                <p class="role">Color Correction</p>
+                <h3>Dimensional blonde finish</h3>
+                <p>Soft brightness, balanced tone, and polished movement.</p>
+              </div>
+            </button>
+
+            <button class="portfolio-card" type="button" data-category="blonding" data-lightbox="results/after-3.jpg" data-title="Warm blonde balance" data-reveal>
+              <figure><img src="results/after-3.jpg" alt="Warm blonde balance result" loading="lazy"></figure>
+              <div>
+                <p class="role">Blonding</p>
+                <h3>Warm blonde balance</h3>
+                <p>A cleaner shape and tone shown after the transformation.</p>
+              </div>
+            </button>
+
+            <button class="portfolio-card" type="button" data-category="blonding" data-lightbox="results/after-3-detail.jpg" data-title="Blonde detail finish" data-reveal>
+              <figure><img src="results/after-3-detail.jpg" alt="Blonde detail finish" loading="lazy"></figure>
+              <div>
+                <p class="role">Detail</p>
+                <h3>Light, shape, and shine</h3>
+                <p>Close-up result detail for tone, smoothness, and finish.</p>
+              </div>
+            </button>
+
+            <button class="portfolio-card" type="button" data-category="extensions" data-lightbox="results/extensions-collage.jpg" data-title="Extension transformation" data-reveal>
+              <figure><img src="results/extensions-collage.jpg" alt="Extension transformation collage" loading="lazy"></figure>
+              <div>
+                <p class="role">Extensions</p>
+                <h3>Length, fullness, movement</h3>
+                <p>An extension result designed to blend with natural movement.</p>
+              </div>
+            </button>
+
+            <button class="portfolio-card" type="button" data-category="corrections" data-lightbox="results/before-3.jpg" data-title="Before blonde correction" data-reveal>
+              <figure><img src="results/before-3.jpg" alt="Before blonde transformation" loading="lazy"></figure>
+              <div>
+                <p class="role">Before</p>
+                <h3>Starting point</h3>
+                <p>Transformation context helps show the work behind the result.</p>
+              </div>
+            </button>
+
+            <button class="portfolio-card" type="button" data-category="corrections" data-lightbox="results/before-3-detail.jpg" data-title="Before detail" data-reveal>
+              <figure><img src="results/before-3-detail.jpg" alt="Before blonde detail" loading="lazy"></figure>
+              <div>
+                <p class="role">Before Detail</p>
+                <h3>Hair history matters</h3>
+                <p>Condition, tone, and previous work shape the correction plan.</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="experience-band">
+        <div class="section-shell experience-grid">
+          <div data-reveal>
+            <p class="eyebrow dark">Not just after photos</p>
+            <h2>Each image represents a plan, a formula, and a client trusting the process.</h2>
+          </div>
+          <div class="experience-list" data-reveal>
+            <article><h3>Consultation-led</h3><p>Jenn studies the starting point before deciding what the hair can safely do.</p></article>
+            <article><h3>Hair integrity first</h3><p>Correction and blonding are paced around the health and history of the hair.</p></article>
+            <article><h3>Personal finish</h3><p>The final look is meant to feel polished, wearable, and connected to the person.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-band" id="contact">
+        <div class="section-shell contact-layout">
+          <div data-reveal>
+            <p class="eyebrow gold">Start your transformation</p>
+            <h2>Bring inspiration, hair history, and trust in the process.</h2>
+            <div class="contact-details">
+              <a href="tel:+17208847707">Text or call: (720) 884-7707</a>
+              <a href="mailto:jendevine318@yahoo.com">jendevine318@yahoo.com</a>
+              <a href="https://www.instagram.com/jendevinedenverhair/" target="_blank" rel="noreferrer">Instagram: @Jendevinedenverhair</a>
+              <address>Denver, Colorado - private appointment-only studio</address>
+            </div>
+            <p class="policy-note">Appointment only. A $50 cancellation or no-show fee applies.</p>
+          </div>
+
+          <div class="booking-card" data-reveal>
+            <p class="role">Inspired by a result?</p>
+            <h3>Send Jennifer your goal, starting point, and hair history.</h3>
+            <p>
+              Use the consultation request to explain what you loved, where your hair is now,
+              and what kind of timing or maintenance fits your life.
+            </p>
+            <a class="button dark" href="consultation.html">Request Consultation</a>
+            <a class="text-link dark-link" href="tel:+17208847707">Text or call: (720) 884-7707</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="lightbox-modal" data-lightbox-modal aria-hidden="true" role="dialog" aria-label="Portfolio image preview">
+      <button class="lightbox-control lightbox-close" type="button" data-lightbox-close aria-label="Close preview">X</button>
+      <button class="lightbox-control lightbox-prev" type="button" data-lightbox-prev aria-label="Previous image">&larr;</button>
+      <figure class="lightbox-frame">
+        <img data-lightbox-image alt="Selected portfolio preview">
+        <figcaption data-lightbox-caption></figcaption>
+      </figure>
+      <button class="lightbox-control lightbox-next" type="button" data-lightbox-next aria-label="Next image">&rarr;</button>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <a href="../index.html#home" class="footer-brand">Devine Hair Studio</a>
+        <p>&copy; 2026 Devine Hair Studio. All rights reserved.</p>
+      </div>
+      <div class="footer-links" aria-label="Footer links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="consultation.html">Book</a>
+        <a href="https://www.instagram.com/jendevinedenverhair/" target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+    </footer>
+
+    <script src="../config.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>
