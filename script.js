@@ -1,4 +1,4 @@
-﻿const body = document.body;
+const body = document.body;
 const header = document.querySelector("[data-header]");
 const scrollProgress = document.querySelector("[data-scroll-progress]");
 const navToggle = document.querySelector(".nav-toggle, [data-menu-toggle]");
@@ -31,6 +31,7 @@ const siteConfig = window.DevineHairStudioConfig || {};
 let activeLightboxIndex = 0;
 let currentJourneySlide = journeySlides.findIndex((slide) => slide.classList.contains("is-active"));
 let journeyIsAnimating = false;
+let scrollFrame = null;
 
 if (currentJourneySlide < 0) {
   currentJourneySlide = 0;
@@ -117,7 +118,10 @@ const updateScrollProgress = () => {
 };
 
 const updateParallax = () => {
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion || window.innerWidth < 900) {
+    parallaxItems.forEach((item) => {
+      item.style.transform = "";
+    });
     return;
   }
 
@@ -130,9 +134,23 @@ const updateParallax = () => {
 updateHeaderState();
 updateScrollProgress();
 updateParallax();
-window.addEventListener("scroll", () => {
+
+const updateOnScroll = () => {
   updateHeaderState();
   updateScrollProgress();
+  updateParallax();
+  scrollFrame = null;
+};
+
+window.addEventListener("scroll", () => {
+  if (scrollFrame) {
+    return;
+  }
+
+  scrollFrame = window.requestAnimationFrame(updateOnScroll);
+}, { passive: true });
+
+window.addEventListener("resize", () => {
   updateParallax();
 }, { passive: true });
 
@@ -345,7 +363,49 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+const cleanFormValue = (value) => String(value || "").trim();
+
+const selectedValues = (formData, name) =>
+  formData.getAll(name)
+    .map(cleanFormValue)
+    .filter(Boolean);
+
+const getConsultationComposedValues = (formData) => {
+  const hairFactors = selectedValues(formData, "hairFactors");
+  const desiredResultOptions = selectedValues(formData, "desiredResultOptions");
+  const hairHistoryDetails = cleanFormValue(formData.get("hairHistoryDetails") || formData.get("hairHistory"));
+  const hairGoalDetails = cleanFormValue(formData.get("hairGoalDetails") || formData.get("hairGoal"));
+  const hairHistory = [
+    hairFactors.length ? `Selected hair history: ${hairFactors.join(", ")}` : "",
+    hairHistoryDetails,
+  ].filter(Boolean).join("\n");
+  const hairGoal = [
+    desiredResultOptions.length ? `Desired result choices: ${desiredResultOptions.join(", ")}` : "",
+    hairGoalDetails,
+  ].filter(Boolean).join("\n");
+
+  return {
+    hairFactors,
+    desiredResultOptions,
+    hairHistory,
+    hairGoal,
+  };
+};
+
+const getConsultationFormData = (form) => {
+  const formData = new FormData(form);
+  const composed = getConsultationComposedValues(formData);
+
+  formData.set("hairHistory", composed.hairHistory);
+  formData.set("hairGoal", composed.hairGoal);
+
+  return { formData, composed };
+};
+
+const formatSelection = (values, fallback = "None selected") => values.length ? values.join(", ") : fallback;
+
 const buildConsultationDetails = (formData, photoNames = []) => {
+  const composed = getConsultationComposedValues(formData);
   const details = [
     `Service: ${formData.get("service") || ""}`,
     `Client Type: ${formData.get("clientType") || ""}`,
@@ -355,16 +415,20 @@ const buildConsultationDetails = (formData, photoNames = []) => {
     `Preferred Contact: ${formData.get("preferredContact") || ""}`,
     `Date Preference: ${formData.get("datePreference") || ""}`,
     `Time Preference: ${formData.get("timePreference") || ""}`,
+    `Availability Flexibility: ${formData.get("availabilityFlexibility") || ""}`,
     `Current Color: ${formData.get("currentColor") || ""}`,
-    `Hair Factors: ${formData.getAll("hairFactors").join(", ") || "None selected"}`,
+    `Hair Length: ${formData.get("hairLength") || ""}`,
+    `Hair Factors: ${formatSelection(composed.hairFactors)}`,
+    `Desired Result Choices: ${formatSelection(composed.desiredResultOptions)}`,
+    `Budget Range: ${formData.get("budgetRange") || "Not provided"}`,
     `Inspiration Link: ${formData.get("inspirationLink") || ""}`,
     photoNames.length ? `Inspiration Photos: ${photoNames.join(", ")}` : "",
     "",
     "Hair history:",
-    formData.get("hairHistory") || "",
+    composed.hairHistory || "",
     "",
     "Desired hair goal:",
-    formData.get("hairGoal") || formData.get("message") || "",
+    composed.hairGoal || formData.get("message") || "",
     "",
     "Message/details:",
     formData.get("message") || "",
@@ -411,26 +475,173 @@ const setStatus = (statusElement, message, type = "") => {
   statusElement.innerHTML = message;
 };
 
+const todayDateValue = () => {
+  const date = new Date();
+  date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+  return date.toISOString().slice(0, 10);
+};
+
+const getFieldGroup = (form, name) => form.querySelector(`[data-field-group="${name}"]`);
+
+const getFirstFieldControl = (form, name) =>
+  getFieldGroup(form, name)?.querySelector("input, select, textarea, button") ||
+  form.querySelector(`[name="${name}"]`);
+
+const clearFieldError = (form, name) => {
+  const group = getFieldGroup(form, name);
+  const errorElement = form.querySelector(`[data-error-for="${name}"]`);
+
+  group?.classList.remove("has-error");
+  errorElement?.removeAttribute("role");
+
+  if (errorElement) {
+    errorElement.textContent = "";
+  }
+
+  form.querySelectorAll(`[name="${name}"]`).forEach((control) => {
+    control.removeAttribute("aria-invalid");
+  });
+};
+
+const setFieldError = (form, name, message) => {
+  const group = getFieldGroup(form, name);
+  const errorElement = form.querySelector(`[data-error-for="${name}"]`);
+
+  group?.classList.add("has-error");
+
+  if (errorElement) {
+    errorElement.textContent = message;
+    errorElement.setAttribute("role", "alert");
+  }
+
+  form.querySelectorAll(`[name="${name}"]`).forEach((control) => {
+    control.setAttribute("aria-invalid", "true");
+  });
+};
+
+const clearConsultationErrors = (form) => {
+  form.querySelectorAll("[data-error-for]").forEach((errorElement) => {
+    clearFieldError(form, errorElement.dataset.errorFor);
+  });
+};
+
+const isValidPhoneNumber = (value) => {
+  const digits = cleanFormValue(value).replace(/\D/g, "");
+  return digits.length >= 10 && digits.length <= 15;
+};
+
+const isValidEmailAddress = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanFormValue(value));
+
+const isPastDate = (value) => value && value < todayDateValue();
+
+const isValidUrl = (value) => {
+  const cleaned = cleanFormValue(value);
+
+  if (!cleaned) {
+    return true;
+  }
+
+  try {
+    const parsed = new URL(cleaned);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch (_error) {
+    return false;
+  }
+};
+
+const getConsultationValidationErrors = (formData, composed) => {
+  const errors = {};
+  const requiredSelections = [
+    ["service", "Choose a desired service."],
+    ["clientType", "Choose whether you are a new or returning client."],
+    ["name", "Enter your full name."],
+    ["email", "Enter your email address."],
+    ["phone", "Enter a phone number where Jennifer can reach you."],
+    ["preferredContact", "Choose how you prefer to be contacted."],
+    ["datePreference", "Choose a preferred appointment date."],
+    ["timePreference", "Choose a preferred time of day."],
+    ["availabilityFlexibility", "Choose how flexible your availability is."],
+    ["currentColor", "Enter your current hair color."],
+    ["hairLength", "Choose your current hair length."],
+    ["acknowledgement", "Please acknowledge that this is a request, not a confirmed appointment."],
+  ];
+
+  requiredSelections.forEach(([name, message]) => {
+    if (!cleanFormValue(formData.get(name))) {
+      errors[name] = message;
+    }
+  });
+
+  if (formData.get("email") && !isValidEmailAddress(formData.get("email"))) {
+    errors.email = "Enter a valid email address.";
+  }
+
+  if (formData.get("phone") && !isValidPhoneNumber(formData.get("phone"))) {
+    errors.phone = "Enter a valid phone number with at least 10 digits.";
+  }
+
+  if (isPastDate(formData.get("datePreference"))) {
+    errors.datePreference = "Choose today or a future date.";
+  }
+
+  if (!composed.hairHistory) {
+    errors.hairHistory = "Select at least one hair history option or add a short note.";
+  }
+
+  if (!composed.hairGoal) {
+    errors.hairGoal = "Choose at least one desired result or add a short description.";
+  }
+
+  if (!isValidUrl(formData.get("inspirationLink"))) {
+    errors.inspirationLink = "Enter a valid http or https link.";
+  }
+
+  return errors;
+};
+
+const applyConsultationErrors = (form, errors) => {
+  clearConsultationErrors(form);
+
+  Object.entries(errors).forEach(([name, message]) => {
+    setFieldError(form, name, message);
+  });
+
+  const firstErrorName = Object.keys(errors)[0];
+  const firstControl = firstErrorName ? getFirstFieldControl(form, firstErrorName) : null;
+
+  firstControl?.focus({ preventScroll: true });
+  getFieldGroup(form, firstErrorName)?.scrollIntoView({ behavior: "smooth", block: "center" });
+};
+
 const submitConsultation = async (form) => {
   const statusElement = form.querySelector("[data-form-status]");
   const submitButton = form.querySelector("button[type='submit']");
-  const formData = new FormData(form);
+  const { formData, composed } = getConsultationFormData(form);
   const photosInput = form.querySelector("input[type='file'][name='photos']");
   const files = Array.from(photosInput?.files || []).slice(0, 3);
 
-  if (!form.checkValidity()) {
-    form.reportValidity();
-    setStatus(statusElement, "Please complete the required fields before submitting.", "is-error");
+  if (form.dataset.submitting === "true") {
+    return;
+  }
+
+  const validationErrors = getConsultationValidationErrors(formData, composed);
+  if (Object.keys(validationErrors).length) {
+    applyConsultationErrors(form, validationErrors);
+    setStatus(statusElement, "Please review the highlighted fields before submitting.", "is-error");
     return;
   }
 
   const invalidFile = files.find((file) => !["image/jpeg", "image/png", "image/webp"].includes(file.type) || file.size > 4 * 1024 * 1024);
   if (invalidFile) {
+    setFieldError(form, "photos", "Inspiration photos must be JPEG, PNG, or WebP and 4MB or smaller.");
     setStatus(statusElement, "Inspiration photos must be JPEG, PNG, or WebP and 4MB or smaller.", "is-error");
     return;
   }
 
+  clearConsultationErrors(form);
+  form.dataset.submitting = "true";
   submitButton.disabled = true;
+  submitButton.setAttribute("aria-busy", "true");
   submitButton.textContent = "Sending Request...";
   setStatus(statusElement, "Sending your consultation request...", "");
 
@@ -445,10 +656,14 @@ const submitConsultation = async (form) => {
       preferredContact: formData.get("preferredContact"),
       datePreference: formData.get("datePreference"),
       timePreference: formData.get("timePreference"),
-      hairHistory: formData.get("hairHistory"),
+      availabilityFlexibility: formData.get("availabilityFlexibility"),
+      hairLength: formData.get("hairLength"),
+      hairHistory: composed.hairHistory,
       currentColor: formData.get("currentColor"),
-      hairGoal: formData.get("hairGoal"),
-      hairFactors: formData.getAll("hairFactors"),
+      hairGoal: composed.hairGoal,
+      hairFactors: composed.hairFactors,
+      desiredResultOptions: composed.desiredResultOptions,
+      budgetRange: formData.get("budgetRange"),
       inspirationLink: formData.get("inspirationLink"),
       message: formData.get("message"),
       acknowledgement: formData.get("acknowledgement") === "on",
@@ -466,6 +681,10 @@ const submitConsultation = async (form) => {
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
+      if (result.errors && typeof result.errors === "object") {
+        applyConsultationErrors(form, result.errors);
+      }
+
       const fallbackHref = buildMailtoHref(formData, files.map((file) => file.name));
       const message = result.code === "EMAIL_NOT_CONFIGURED"
         ? `Online email delivery is not configured yet. <a class="text-link dark-link" href="${fallbackHref}">Open email fallback</a>.`
@@ -478,11 +697,14 @@ const submitConsultation = async (form) => {
     form.reset();
     form.querySelector("[data-form-started-at]")?.setAttribute("value", String(Date.now()));
     setStatus(statusElement, result.message || "Your consultation request was sent. Jennifer will follow up soon.", "is-success");
+    statusElement?.focus?.({ preventScroll: true });
   } catch (_error) {
     const fallbackHref = buildMailtoHref(formData, files.map((file) => file.name));
     setStatus(statusElement, `The online request could not be sent. <a class="text-link dark-link" href="${fallbackHref}">Open email fallback</a>.`, "is-error");
   } finally {
+    form.dataset.submitting = "false";
     submitButton.disabled = false;
+    submitButton.removeAttribute("aria-busy");
     submitButton.textContent = submitButton.dataset.submitLabel || "Submit Consultation Request";
   }
 };
@@ -491,9 +713,45 @@ document.querySelectorAll("[data-form-started-at]").forEach((input) => {
   input.setAttribute("value", String(Date.now()));
 });
 
+document.querySelectorAll("input[type='date'][name='datePreference']").forEach((input) => {
+  input.min = input.min || todayDateValue();
+});
+
 consultationForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   submitConsultation(consultationForm);
+});
+
+consultationForm?.addEventListener("input", (event) => {
+  const name = event.target?.name;
+  const relatedFields = {
+    hairFactors: ["hairHistory"],
+    hairHistoryDetails: ["hairHistory"],
+    desiredResultOptions: ["hairGoal"],
+    hairGoalDetails: ["hairGoal"],
+  };
+
+  if (name) {
+    clearFieldError(consultationForm, name);
+  }
+
+  relatedFields[name]?.forEach((fieldName) => clearFieldError(consultationForm, fieldName));
+});
+
+consultationForm?.addEventListener("change", (event) => {
+  const name = event.target?.name;
+  const relatedFields = {
+    hairFactors: ["hairHistory"],
+    hairHistoryDetails: ["hairHistory"],
+    desiredResultOptions: ["hairGoal"],
+    hairGoalDetails: ["hairGoal"],
+  };
+
+  if (name) {
+    clearFieldError(consultationForm, name);
+  }
+
+  relatedFields[name]?.forEach((fieldName) => clearFieldError(consultationForm, fieldName));
 });
 
 contactForm?.addEventListener("submit", (event) => {
