@@ -93,6 +93,445 @@
             <p class="policy-note">No walk-ins. Pricing is consultation required. A $50 cancellation or no-show fee applies.</p>
           </div>
 
+          <form class="contact-form consultation-form" data-consultation-form enctype="multipart/form-data" novalidate aria-describedby="consultation-form-note">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
+            <input type="hidden" name="formStartedAt" data-form-started-at>
+
+            <div class="form-intro full-field">
+              <p class="form-kicker">Appointment request</p>
+              <h3>Share the essentials in a few guided steps.</h3>
+              <p id="consultation-form-note">
+                Most fields are quick selections so Jennifer can understand your goals without making you type a full essay.
+                Required fields are marked with <span aria-hidden="true">*</span>.
+              </p>
+            </div>
+
+            <section class="form-section full-field" aria-labelledby="contact-info-heading">
+              <div class="form-section-heading">
+                <span>01</span>
+                <div>
+                  <h3 id="contact-info-heading">Contact info</h3>
+                  <p>Jennifer will use this to follow up and confirm the next step.</p>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="field-group" data-field-group="name">
+                  <label for="consultation-name">Full name <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input id="consultation-name" type="text" name="name" autocomplete="name" required>
+                  <p class="field-error" id="name-error" data-error-for="name"></p>
+                </div>
+
+                <div class="field-group" data-field-group="phone">
+                  <label for="consultation-phone">Phone number <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input id="consultation-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="(720) 555-0100" required>
+                  <p class="field-error" id="phone-error" data-error-for="phone"></p>
+                </div>
+
+                <div class="field-group" data-field-group="email">
+                  <label for="consultation-email">Email <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input id="consultation-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+                  <p class="field-error" id="email-error" data-error-for="email"></p>
+                </div>
+
+                <fieldset class="field-group" data-field-group="preferredContact" aria-describedby="preferred-contact-error">
+                  <legend>Preferred contact <span class="required-mark" aria-hidden="true">*</span></legend>
+                  <div class="segmented-group">
+                    <label class="segment-option">
+                      <input type="radio" name="preferredContact" value="Text" required>
+                      <span>Text</span>
+                    </label>
+                    <label class="segment-option">
+                      <input type="radio" name="preferredContact" value="Call">
+                      <span>Call</span>
+                    </label>
+                    <label class="segment-option">
+                      <input type="radio" name="preferredContact" value="Email">
+                      <span>Email</span>
+                    </label>
+                  </div>
+                  <p class="field-error" id="preferred-contact-error" data-error-for="preferredContact"></p>
+                </fieldset>
+              </div>
+            </section>
+
+            <section class="form-section full-field" aria-labelledby="service-heading">
+              <div class="form-section-heading">
+                <span>02</span>
+                <div>
+                  <h3 id="service-heading">Desired service</h3>
+                  <p>Choose the closest match. Jennifer can adjust the plan after reviewing your request.</p>
+                </div>
+              </div>
+
+              <fieldset class="field-group" data-field-group="service" aria-describedby="service-help service-error">
+                <legend>Service type <span class="required-mark" aria-hidden="true">*</span></legend>
+                <p class="field-help" id="service-help">Select one primary service.</p>
+                <div class="option-grid service-options">
+                  <label class="option-card">
+                    <input type="radio" name="service" value="Color or blonding" required>
+                    <span>Color or blonding</span>
+                    <small>Highlights, balayage, blonde, or custom color.</small>
+                  </label>
+                  <label class="option-card">
+                    <input type="radio" name="service" value="Color correction">
+                    <span>Color correction</span>
+                    <small>Uneven color, bands, box dye, or repair plan.</small>
+                  </label>
+                  <label class="option-card">
+                    <input type="radio" name="service" value="Extensions">
+                    <span>Extensions</span>
+                    <small>Length, fullness, blend, or maintenance.</small>
+                  </label>
+                  <label class="option-card">
+                    <input type="radio" name="service" value="Cut or trim">
+                    <span>Cut or trim</span>
+                    <small>Shape, movement, and healthy ends.</small>
+                  </label>
+                  <label class="option-card">
+                    <input type="radio" name="service" value="Keratin or smoothing">
+                    <span>Keratin or smoothing</span>
+                    <small>Smoother finish and frizz control.</small>
+                  </label>
+                  <label class="option-card">
+                    <input type="radio" name="service" value="Not sure">
+                    <span>Not sure yet</span>
+                    <small>Jennifer can guide the best starting point.</small>
+                  </label>
+                </div>
+                <p class="field-error" id="service-error" data-error-for="service"></p>
+              </fieldset>
+
+              <fieldset class="field-group" data-field-group="clientType" aria-describedby="client-type-error">
+                <legend>Client type <span class="required-mark" aria-hidden="true">*</span></legend>
+                <div class="segmented-group two-up">
+                  <label class="segment-option">
+                    <input type="radio" name="clientType" value="New client" required>
+                    <span>New client</span>
+                  </label>
+                  <label class="segment-option">
+                    <input type="radio" name="clientType" value="Returning client">
+                    <span>Returning client</span>
+                  </label>
+                </div>
+                <p class="field-error" id="client-type-error" data-error-for="clientType"></p>
+              </fieldset>
+            </section>
+
+            <section class="form-section full-field" aria-labelledby="schedule-heading">
+              <div class="form-section-heading">
+                <span>03</span>
+                <div>
+                  <h3 id="schedule-heading">Scheduling preferences</h3>
+                  <p>This is an appointment request only. Jennifer will confirm timing directly.</p>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="field-group" data-field-group="datePreference">
+                  <label for="consultation-date">Preferred appointment date <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input id="consultation-date" type="date" name="datePreference" required>
+                  <p class="field-help">Pick your ideal date. Flexibility below helps Jennifer find the best fit.</p>
+                  <p class="field-error" id="date-preference-error" data-error-for="datePreference"></p>
+                </div>
+
+                <fieldset class="field-group" data-field-group="timePreference" aria-describedby="time-preference-error">
+                  <legend>Preferred time of day <span class="required-mark" aria-hidden="true">*</span></legend>
+                  <div class="segmented-group">
+                    <label class="segment-option">
+                      <input type="radio" name="timePreference" value="Morning" required>
+                      <span>Morning</span>
+                    </label>
+                    <label class="segment-option">
+                      <input type="radio" name="timePreference" value="Afternoon">
+                      <span>Afternoon</span>
+                    </label>
+                    <label class="segment-option">
+                      <input type="radio" name="timePreference" value="Flexible">
+                      <span>Flexible</span>
+                    </label>
+                  </div>
+                  <p class="field-error" id="time-preference-error" data-error-for="timePreference"></p>
+                </fieldset>
+              </div>
+
+              <fieldset class="field-group" data-field-group="availabilityFlexibility" aria-describedby="availability-flexibility-error">
+                <legend>Availability flexibility <span class="required-mark" aria-hidden="true">*</span></legend>
+                <div class="segmented-group wrap">
+                  <label class="segment-option">
+                    <input type="radio" name="availabilityFlexibility" value="I need a specific date" required>
+                    <span>Specific date</span>
+                  </label>
+                  <label class="segment-option">
+                    <input type="radio" name="availabilityFlexibility" value="I'm flexible within a few days">
+                    <span>Few days</span>
+                  </label>
+                  <label class="segment-option">
+                    <input type="radio" name="availabilityFlexibility" value="I'm flexible this month">
+                    <span>Very flexible</span>
+                  </label>
+                </div>
+                <p class="field-error" id="availability-flexibility-error" data-error-for="availabilityFlexibility"></p>
+              </fieldset>
+            </section>
+
+            <section class="form-section full-field" aria-labelledby="hair-details-heading">
+              <div class="form-section-heading">
+                <span>04</span>
+                <div>
+                  <h3 id="hair-details-heading">Hair goals and history</h3>
+                  <p>Quick selections help Jennifer understand your hair chemistry before she reaches out.</p>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="field-group" data-field-group="currentColor">
+                  <label for="current-color">Current hair color <span class="required-mark" aria-hidden="true">*</span></label>
+                  <input id="current-color" type="text" name="currentColor" placeholder="Example: dark brown with old highlights" required>
+                  <p class="field-error" id="current-color-error" data-error-for="currentColor"></p>
+                </div>
+
+                <fieldset class="field-group" data-field-group="hairLength" aria-describedby="hair-length-error">
+                  <legend>Hair length <span class="required-mark" aria-hidden="true">*</span></legend>
+                  <div class="segmented-group">
+                    <label class="segment-option">
+                      <input type="radio" name="hairLength" value="Short" required>
+                      <span>Short</span>
+                    </label>
+                    <label class="segment-option">
+                      <input type="radio" name="hairLength" value="Medium">
+                      <span>Medium</span>
+                    </label>
+                    <label class="segment-option">
+                      <input type="radio" name="hairLength" value="Long">
+                      <span>Long+</span>
+                    </label>
+                  </div>
+                  <p class="field-error" id="hair-length-error" data-error-for="hairLength"></p>
+                </fieldset>
+              </div>
+
+              <fieldset class="field-group" data-field-group="hairHistory" aria-describedby="hair-history-help hair-history-error">
+                <legend>Hair history <span class="required-mark" aria-hidden="true">*</span></legend>
+                <p class="field-help" id="hair-history-help">Select anything that applies, then add details only if needed.</p>
+                <div class="check-grid luxury-checks">
+                  <label><input type="checkbox" name="hairFactors" value="Box dye"> Box dye</label>
+                  <label><input type="checkbox" name="hairFactors" value="Bleach/highlights"> Bleach or highlights</label>
+                  <label><input type="checkbox" name="hairFactors" value="Extensions"> Extensions</label>
+                  <label><input type="checkbox" name="hairFactors" value="Damaged/breakage"> Damaged/breakage</label>
+                  <label><input type="checkbox" name="hairFactors" value="Not sure"> Not sure</label>
+                </div>
+                <label class="field-sublabel" for="hair-history-details">
+                  Details Jennifer should know
+                  <textarea id="hair-history-details" name="hairHistoryDetails" rows="4" placeholder="Optional if the choices above cover it. Add box dye timing, previous lightener, treatments, extensions, or corrective work."></textarea>
+                </label>
+                <p class="field-error" id="hair-history-error" data-error-for="hairHistory"></p>
+              </fieldset>
+
+              <fieldset class="field-group" data-field-group="hairGoal" aria-describedby="hair-goal-help hair-goal-error">
+                <legend>Desired result <span class="required-mark" aria-hidden="true">*</span></legend>
+                <p class="field-help" id="hair-goal-help">Choose the outcome that feels closest. Add a few words if there is a specific vision.</p>
+                <div class="check-grid luxury-checks">
+                  <label><input type="checkbox" name="desiredResultOptions" value="Subtle refresh"> Subtle refresh</label>
+                  <label><input type="checkbox" name="desiredResultOptions" value="Big transformation"> Big transformation</label>
+                  <label><input type="checkbox" name="desiredResultOptions" value="Brighter/blonder"> Brighter/blonder</label>
+                  <label><input type="checkbox" name="desiredResultOptions" value="Correct uneven color"> Correct uneven color</label>
+                  <label><input type="checkbox" name="desiredResultOptions" value="Not sure yet"> Not sure yet</label>
+                </div>
+                <label class="field-sublabel" for="hair-goal-details">
+                  Desired result description
+                  <textarea id="hair-goal-details" name="hairGoalDetails" rows="4" placeholder="Optional if the choices above cover it. Describe tone, brightness, length, inspiration, or concerns."></textarea>
+                </label>
+                <p class="field-error" id="hair-goal-error" data-error-for="hairGoal"></p>
+              </fieldset>
+            </section>
+
+            <section class="form-section full-field" aria-labelledby="final-notes-heading">
+              <div class="form-section-heading">
+                <span>05</span>
+                <div>
+                  <h3 id="final-notes-heading">Finishing details</h3>
+                  <p>Optional context that can make the consultation easier to quote and plan.</p>
+                </div>
+              </div>
+
+              <fieldset class="field-group" data-field-group="budgetRange">
+                <legend>Budget comfort level <span class="optional-mark">Optional</span></legend>
+                <div class="segmented-group wrap">
+                  <label class="segment-option">
+                    <input type="radio" name="budgetRange" value="Under $150">
+                    <span>Under $150</span>
+                  </label>
+                  <label class="segment-option">
+                    <input type="radio" name="budgetRange" value="$150-$250">
+                    <span>$150-$250</span>
+                  </label>
+                  <label class="segment-option">
+                    <input type="radio" name="budgetRange" value="$250-$400">
+                    <span>$250-$400</span>
+                  </label>
+                  <label class="segment-option">
+                    <input type="radio" name="budgetRange" value="$400+">
+                    <span>$400+</span>
+                  </label>
+                  <label class="segment-option">
+                    <input type="radio" name="budgetRange" value="Not sure / need quote">
+                    <span>Need quote</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="form-grid">
+                <div class="field-group" data-field-group="inspirationLink">
+                  <label for="inspiration-link">Inspiration image link <span class="optional-mark">Optional</span></label>
+                  <input id="inspiration-link" type="url" name="inspirationLink" placeholder="Instagram, Pinterest, or image link">
+                  <p class="field-error" id="inspiration-link-error" data-error-for="inspirationLink"></p>
+                </div>
+
+                <div class="field-group" data-field-group="photos">
+                  <label for="inspiration-photos">Inspiration photos <span class="optional-mark">Optional</span></label>
+                  <input id="inspiration-photos" class="file-input" type="file" name="photos" accept="image/jpeg,image/png,image/webp" multiple>
+                  <span class="field-note">Up to 3 images, 4MB each. JPEG, PNG, or WebP.</span>
+                  <p class="field-error" id="photos-error" data-error-for="photos"></p>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="extra-notes">Notes or special requests <span class="optional-mark">Optional</span></label>
+                <textarea id="extra-notes" name="message" rows="4" placeholder="Anything else Jennifer should know before she follows up?"></textarea>
+              </div>
+            </section>
+
+            <div class="acknowledgement full-field" data-field-group="acknowledgement">
+              <label>
+                <input type="checkbox" name="acknowledgement" required>
+                <span>I understand this is a consultation request and my appointment is not confirmed until Jennifer follows up directly.</span>
+              </label>
+              <p class="field-error" id="acknowledgement-error" data-error-for="acknowledgement"></p>
+            </div>
+
+            <button class="form-button full-field" type="submit" data-submit-label="Submit Consultation Request">
+              Submit Consultation Request
+            </button>
+            <p class="form-status full-field" data-form-status role="status" aria-live="polite" tabindex="-1"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <a href="../index.html#home" class="footer-brand">Devine Hair Studio</a>
+        <p>&copy; 2026 Devine Hair Studio. All rights reserved.</p>
+      </div>
+      <div class="footer-links" aria-label="Footer links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="#consultation">Book</a>
+        <a href="https://www.instagram.com/jendevinedenverhair/" target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+    </footer>
+
+    <script src="../config.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Request a Consultation | Devine Hair Studio</title>
+    <meta
+      name="description"
+      content="Request a consultation with Jennifer Devine at Devine Hair Studio in Denver for custom color, color corrections, blonding, extensions, cuts, and smoothing services."
+    >
+    <link
+      rel="preload"
+      as="image"
+      href="results/optimized/after-1-1280.webp"
+      imagesrcset="results/optimized/after-1-480.webp 480w, results/optimized/after-1-720.webp 720w, results/optimized/after-1-960.webp 960w, results/optimized/after-1-1280.webp 1280w, results/optimized/after-1-1600.webp 1600w"
+      imagesizes="100vw"
+      type="image/webp"
+    >
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="../index.html#home" aria-label="Devine Hair Studio home">
+        <span class="brand-mark">Devine</span>
+        <span class="brand-subtitle">Hair Studio</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#home" data-nav-link>Home</a>
+        <a href="about.html" data-nav-link>About</a>
+        <a href="services.html" data-nav-link>Services</a>
+        <a href="portfolio.html" data-nav-link>Portfolio</a>
+        <a href="#consultation" data-nav-link>Book</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="consultation" aria-label="Request a consultation">
+        <div class="hero-media" data-parallax>
+          <picture class="responsive-picture"><source type="image/webp" srcset="results/optimized/after-1-480.webp 480w, results/optimized/after-1-720.webp 720w, results/optimized/after-1-960.webp 960w, results/optimized/after-1-1280.webp 1280w, results/optimized/after-1-1600.webp 1600w" sizes="100vw"><img alt="Dimensional blonde color result by Jennifer Devine" src="results/optimized/after-1-1280.jpg" srcset="results/optimized/after-1-480.jpg 480w, results/optimized/after-1-720.jpg 720w, results/optimized/after-1-960.jpg 960w, results/optimized/after-1-1280.jpg 1280w, results/optimized/after-1-1600.jpg 1600w" sizes="100vw" width="3024" height="4032" decoding="async" fetchpriority="high"></picture>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-shell">
+          <div class="hero-copy" data-reveal>
+            <p class="eyebrow">Request a consultation</p>
+            <h1>Start your color journey with clarity, care, and a plan.</h1>
+            <p>
+              A consultation helps Jennifer understand your hair history, timing, goals, and service
+              fit before confirming an appointment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="editorial-intro">
+        <div class="section-shell intro-grid">
+          <div data-reveal>
+            <p class="eyebrow dark">Before the appointment</p>
+            <h2>Your appointment is not confirmed until Jennifer follows up directly.</h2>
+          </div>
+          <div class="intro-copy" data-reveal>
+            <p>
+              Color corrections, blonding, and extensions require enough time, the right products,
+              and a realistic plan. Share as much detail as you can so Jenn can guide the next step.
+            </p>
+            <p>
+              You can also text or call <a class="text-link dark-link" href="tel:+17208847707">(720) 884-7707</a>
+              for appointment requests.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-band">
+        <div class="section-shell contact-layout">
+          <div data-reveal>
+            <p class="eyebrow gold">Tell us about your hair goals</p>
+            <h2>A better consultation starts with better context.</h2>
+            <div class="contact-details">
+              <a href="tel:+17208847707">Text or call: (720) 884-7707</a>
+              <a href="mailto:jendevine318@yahoo.com">jendevine318@yahoo.com</a>
+              <a href="https://www.instagram.com/jendevinedenverhair/" target="_blank" rel="noreferrer">Instagram: @Jendevinedenverhair</a>
+              <address>Denver, Colorado - private appointment-only studio</address>
+            </div>
+            <p class="policy-note">No walk-ins. Pricing is consultation required. A $50 cancellation or no-show fee applies.</p>
+          </div>
+
           <form class="contact-form consultation-form" data-consultation-form enctype="multipart/form-data" novalidate>
           <form class="contact-form consultation-form" data-consultation-form enctype="multipart/form-data" novalidate aria-describedby="consultation-form-note">
             <input type="text" name="website" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
